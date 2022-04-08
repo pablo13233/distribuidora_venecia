@@ -14,7 +14,7 @@ DATABASES = {
         'NAME': 'distribuidora_db',
         'USER': 'venecia',
         'PASSWORD': '!venecia!',
-        'HOST': '190.4.14.18',
+        'HOST': '190.14.14.18',
         'PORT': '5432',
     }
 }
