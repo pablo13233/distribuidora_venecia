@@ -1,1 +1,2 @@
 *.pyc
+distribuidora/settings/local.py
