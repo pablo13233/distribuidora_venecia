@@ -1,9 +1,30 @@
-{% extends "home/base_home.html" %}
+{% extends "base.html" %}
 
 {% load  static %}
 
+{% block title %}
+Distribuidora Venecia
+{% endblock title %}
+
 {% block content %}
 
-<h1> En Mantenimiento</h1>
+<!-- ================ SECTION INTRO ================ -->
+{% include 'includes/sections/intro.html' %}
+<!-- ================ SECTION INTRO END.// ================ -->
+
+
+<!-- ================ SECTION PRODUCTS ================ -->
+{% include 'includes/sections/productos.html' %}
+<!-- ================ SECTION PRODUCTS END.// ================ -->
+
+
+<!-- ================ SECTION FEATURE ================ -->
+{% include 'includes/sections/feature.html' %}
+<!-- ================ SECTION FEATURE END.// ================ -->
+
+
+<!-- ================ SECTION SKILLS ================ -->
+{% include 'includes/sections/skills.html' %}
+ <!-- ================ SECTION SKILLS END.// ================ -->
 
 {% endblock content %}
