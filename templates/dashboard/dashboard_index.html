@@ -1,0 +1,64 @@
+{% extends "dashboard/dashboard_base.html" %}
+
+{% load  static %}
+
+{% block title %}
+Administracion
+{% endblock title %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row row-cols-2">
+        <div class="col-6 no-gutters">
+            <div class="row no-gutters">
+                <div class="col text-center">
+                    <h4>Gesiton de Productos</h4>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col text-center" >
+                    <img src="{% static 'images\dashboard\productos.png' %}" class="btn img-fluid" style="width: auto; height: 150px;" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="col-6 no-gutters">
+            <div class="row no-gutters">
+                <div class="col text-center">
+                    <h4>Gesiton de Categorias</h4>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col text-center" >
+                    <img src="{% static 'images\dashboard\categoria.png' %}" class="btn img-fluid" style="width: auto; height: 150px;" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="col-6 no-gutters">
+            <div class="row no-gutters">
+                <div class="col text-center">
+                    <h4>Gesiton de Marcas</h4>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col text-center" >
+                    <img src="{% static 'images\dashboard\marca.png' %}" class="btn img-fluid" style="width: auto; height: 150px;" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="col-6 no-gutters">
+            <div class="row no-gutters">
+                <div class="col text-center">
+                    <h4>Gesiton de Carrusel</h4>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="col text-center" >
+                    <img src="{% static 'images\dashboard\carrusel.png' %}" class="btn img-fluid" style="width: auto; height: 150px;" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
