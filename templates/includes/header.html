@@ -1,0 +1,83 @@
+{% load static %}
+
+<header class="section-header">
+
+    <section class="header-main border-bottom">
+        <div class="container">
+            <div class="row gy-3 align-items-center">
+                <div class="col-lg-2 col-md-3 col-4">
+                    <a href="/" class="brand-wrap">
+                        <img class="logo" height="40" src="{% static '/images/logo.svg' %}">
+                    </a> <!-- brand-wrap end.// -->
+                </div>
+                <div class="order-md-last col-lg-5 col-md-5 col-8">
+                    <div class="float-end">
+                        <a href="#" class="btn btn-light">
+                            <i class="fa me-lg-1 fa-phone text-primary"></i>
+                            <span class="text-primary d-none d-lg-inline-block">+504 8900-3488</span>
+                        </a>
+                        <!-- <a href="#" class="btn btn-light"> 
+			                <i class="fa fa-heart text-primary"></i>
+			              </a>
+			              <a href="#" class="btn btn-light"> 
+			                <i class="fa fa-user text-primary"></i>
+			              </a>
+			              <a href="#" class="btn btn-primary"> 
+			                <i class="me-1 fa fa-plus-circle"></i> Add item  
+			              </a> -->
+                    </div>
+                </div> <!-- col end.// -->
+                <div class="col-lg-5 col-md-4 col-12">
+                    <form action="#">
+                        <div class="input-group w-100">
+                            <input type="text" class="form-control" placeholder="Search" style="width:55%;">
+                            <button class="btn btn-light">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div> <!-- input-group end.// -->
+                    </form> <!-- search-wrap end.// -->
+                </div> <!-- col end.// -->
+            </div> <!-- row end.// -->
+        </div> <!-- container end.// -->
+    </section> <!-- header-main end.// -->
+
+
+    <nav class="navbar navbar-light navbar-expand-lg border-bottom">
+        <div class="container">
+            <button class="navbar-toggler border" type="button" data-bs-toggle="collapse" data-bs-target="#navbar_main"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbar_main">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link ps-0" href="#" data-bs-toggle="dropdown"> <i class="fa fa-bars"></i>
+                            Categorias </a>
+                        <ul class="dropdown-menu">
+                            <li> <a class="dropdown-item" href="#">Categoria 1 </a> </li>
+                            <li> <a class="dropdown-item" href="#">Categoria 2</a> </li>
+                            <li> <a class="dropdown-item" href="#">Categoria 3</a> </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ofertas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Temporada</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Oficina</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Menu item</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Menu name</a>
+                    </li>
+                </ul>
+            </div> <!-- collapse end.// -->
+        </div> <!-- container end.// -->
+    </nav> <!-- navbar end.// -->
+</header> <!-- section-header end.// -->
