@@ -18,7 +18,9 @@ Administracion
             </div>
             <div class="row no-gutters">
                 <div class="col text-center" >
-                    <img src="{% static 'images\dashboard\productos.png' %}" class="btn img-fluid" style="width: auto; height: 150px;" alt="">
+                    <a href="{% url 'producto:producto_ajax' %}">
+                        <img src="{% static 'images\dashboard\productos.png' %}" class="btn img-fluid" style="width: auto; height: 150px;" alt="">
+                    </a>
                 </div>
             </div>
         </div>
@@ -30,7 +32,9 @@ Administracion
             </div>
             <div class="row no-gutters">
                 <div class="col text-center" >
-                    <img src="{% static 'images\dashboard\categoria.png' %}" class="btn img-fluid" style="width: auto; height: 150px;" alt="">
+                    <a href="{% url 'categoria:categoria_ajax' %}">
+                        <img src="{% static 'images\dashboard\categoria.png' %}" class="btn img-fluid" style="width: auto; height: 150px;" alt="">
+                    </a>
                 </div>
             </div>
         </div>
@@ -42,7 +46,9 @@ Administracion
             </div>
             <div class="row no-gutters">
                 <div class="col text-center" >
-                    <img src="{% static 'images\dashboard\marca.png' %}" class="btn img-fluid" style="width: auto; height: 150px;" alt="">
+                    <a href="{% url 'marca:marca_ajax' %}">
+                        <img src="{% static 'images\dashboard\marca.png' %}" class="btn img-fluid" style="width: auto; height: 150px;" alt="">
+                    </a>
                 </div>
             </div>
         </div>
