@@ -34,6 +34,7 @@ def producto_ajax (request):
                     imagen.name = str(pro.pk)+"_"+imagen.name
                     pro.img_producto = imagen
                     pro.save()#Actualizamos la ruta de la imagen con la concatenacion del id recien creado
+                data = {'tipo_accion': 'crear','correcto': True}
 
             elif action == 'editar':
 
@@ -56,6 +57,7 @@ def producto_ajax (request):
 
                 
                 pro.save()
+                data = {'tipo_accion': 'editar','correcto': True}
 
             elif action == 'eliminar':
                 pro = Producto.objects.get(pk=request.POST['id'])
@@ -63,10 +65,13 @@ def producto_ajax (request):
                     pro.img_producto.delete()
 
                 pro.delete()
+                data = {'tipo_accion': 'eliminar','correcto': True}
             else:
                 data['error'] = 'Ha ocurrido un error'
         except Exception as e:
             data['error'] = str(e)
+            data = {'tipo_accion': 'error','correcto': False, 'error': str(e)}
+
         return JsonResponse(data, safe=False)
     elif request.method == 'GET':
         categorias = Categoria.objects.all()

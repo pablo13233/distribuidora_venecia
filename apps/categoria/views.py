@@ -29,7 +29,8 @@ def categoria_ajax (request):
                     imagen.name = str(ca.pk)+"_"+imagen.name
                     ca.img_categoria = imagen
                     ca.save()#Actualizamos la ruta de la imagen con la concatenacion del id recien creado
-
+                
+                data = {'tipo_accion': 'crear','correcto': True}
             elif action == 'editar':
 
                 ca = Categoria.objects.get(pk=request.POST['id'])
@@ -46,6 +47,7 @@ def categoria_ajax (request):
 
                 ca.usuario = User.objects.get(pk=1)
                 ca.save()
+                data = {'tipo_accion': 'editar','correcto': True}
 
             elif action == 'eliminar':
                 cal = Categoria.objects.get(pk=request.POST['id'])
@@ -53,10 +55,13 @@ def categoria_ajax (request):
                     cal.img_categoria.delete()
 
                 cal.delete()
+                data = {'tipo_accion': 'eliminar','correcto': True}
+
             else:
                 data['error'] = 'Ha ocurrido un error'
         except Exception as e:
             data['error'] = str(e)
+            data = {'tipo_accion': 'error','correcto': False, 'error': str(e)}
         return JsonResponse(data, safe=False)
     elif request.method == 'GET':
         print("Metodo normal")

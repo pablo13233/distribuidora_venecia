@@ -9,4 +9,5 @@ urlpatterns = [
     path('', include('apps.categoria.urls')),
     #path('', include('apps.carrusel.urls')),
     path('', include('apps.producto.urls')),
+    path('', include('apps.marca.urls')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

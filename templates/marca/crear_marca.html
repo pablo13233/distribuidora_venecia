@@ -3,7 +3,7 @@
 {% load  static %}
 
 {% block title %}
-Administracion categoria Venecia
+Administracion marca Venecia
 {% endblock title %}
 
 {% block content %}
@@ -27,7 +27,7 @@ Administracion categoria Venecia
 <div class="container-fluid">
     <div class="content-wrapper my-3 p-3 bg-body rounded shadow-sm">
       <div class="d-flex justify-content-center col-12 mb-4">
-        <h3 class="mt-4">Categoría producto</h3>
+        <h3 class="mt-4">Marca producto</h3>
       </div>
         
         <div class="table-responsive shadow p-4 mb-4 bg-white rounded">
@@ -35,7 +35,7 @@ Administracion categoria Venecia
                    <thead>
                      <tr>
                         <th>Nro</th>
-                        <th>Categoría</th>
+                        <th>Marca</th>
                         <th>Descripción</th>
                         <th>Acciones</th>
                      </tr>
@@ -50,7 +50,7 @@ Administracion categoria Venecia
                 class="form-control btn btn-success btn-sm" 
                 id="btnAdd">
                 <i class="fa-solid fa-plus"></i>
-                Agregar categoría
+                Agregar marca
                 </button>
             </div>
         </div>
@@ -60,24 +60,24 @@ Administracion categoria Venecia
 
 
     
-    <!-- Inicio Modal Agregar Categoria -->
-    <div class="modal fade" id="modalCategoria" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-- Inicio Modal Agregar Marca -->
+    <div class="modal fade" id="modalMarca" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="">
-                <i class="fa-solid fa-plus"></i> <span>Crear Categoría</span></h5>
+                <i class="fa-solid fa-plus"></i> <span>Crear Marca</span></h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
 
-                <form method="post" action="." id="form_categoria" enctype="multipart/form-data">
+                <form method="post" action="." id="form_marca" enctype="multipart/form-data">
                     <div class="form-group row">
                         {% csrf_token %}
                         <input type="text" class="d-none" name="action" id="action" value="crear" />
-                        <input type="text" class="d-none" id="id_categoria" value="0" />
+                        <input type="text" class="d-none" id="id_marca" value="0" />
 
                         <div class="col-md-12">
                             <label for="">Nombre</label>
@@ -109,10 +109,10 @@ Administracion categoria Venecia
           </div>
         </div>
     </div>
-    <!-- Fin Modal Agregar Categoria -->
+    <!-- Fin Modal Agregar Marca -->
 
 
-    <!-- Inicio modal ver/editar imagen-->
+    <!-- Inicio modal ver imagen-->
     <div class="modal fade" id="modalImagen">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -120,24 +120,24 @@ Administracion categoria Venecia
             </div>
         </div>
     </div>
-    <!-- Fin modal ver/editar imagen-->
+    <!-- Fin modal ver imagen-->
 
 
 <script>
-var tablaCategoria;
+var tablaMarca;
 var modalTitulo = $('.modal-title');
 window.onload = function(){
     
     //alert("Pagina cargada");
     $("#btnAdd").on("click", function(){
-        modalTitulo.find('span').html('Crear categoría');
+        modalTitulo.find('span').html('Crear marca');
         modalTitulo.find('i').removeClass().addClass('fas fa-plus');
         $('#action').val("crear");
-        $('#form_categoria')[0].reset();
+        $('#form_marca')[0].reset();
         $('#descripcion').val("");
         $('#nombre').focus();
         
-        $('#modalCategoria').modal('show');
+        $('#modalMarca').modal('show');
     });
     $('#datatable').DataTable();
     obtenerDatos();
@@ -146,23 +146,23 @@ window.onload = function(){
 
 
 $('#datatable tbody').on('click', 'a[rel="editar"]', function () {
-    var tr = tablaCategoria.cell($(this).closest('td, li')).index();
-    var data = tablaCategoria.row(tr.row).data();
+    var tr = tablaMarca.cell($(this).closest('td, li')).index();
+    var data = tablaMarca.row(tr.row).data();
 
-    modalTitulo.find('span').html('Editar categoría');
+    modalTitulo.find('span').html('Editar marca');
     modalTitulo.find('i').removeClass().addClass('fas fa-edit');
 
     $('#action').val("editar");
-    $('#id_categoria').val(data.id);
-    $('#nombre').val(data.nombre_categoria);
-    $('#descripcion').val(data.descripcion_categoria);
-    $('#modalCategoria').modal('show');
+    $('#id_marca').val(data.id);
+    $('#nombre').val(data.nombre_marca);
+    $('#descripcion').val(data.descripcion_marca);
+    $('#modalMarca').modal('show');
 }).on('click', 'a[rel="eliminar"]', function (){
-    var tr = tablaCategoria.cell($(this).closest('td, li')).index();
-    var data = tablaCategoria.row(tr.row).data();
+    var tr = tablaMarca.cell($(this).closest('td, li')).index();
+    var data = tablaMarca.row(tr.row).data();
 
     $('#action').val("eliminar");
-    $('#id_categoria').val(data.id);
+    $('#id_marca').val(data.id);
 
     Swal.fire({
         title: `¿Esta seguro de eliminar el registro Nro ${data.id}?`,
@@ -179,10 +179,10 @@ $('#datatable tbody').on('click', 'a[rel="editar"]', function () {
       });
 
 }).on('click', 'a[rel="verImagen"]', function(){
-    var tr = tablaCategoria.cell($(this).closest('td, li')).index();
-    var data = tablaCategoria.row(tr.row).data();
-    console.log(data.img_categoria);
-    $("#id_imagen").attr("src", data.img_categoria);
+    var tr = tablaMarca.cell($(this).closest('td, li')).index();
+    var data = tablaMarca.row(tr.row).data();
+    
+    $("#id_imagen").attr("src", data.img_marca);
     $("#modalImagen").modal("show");
 });
 
@@ -202,9 +202,9 @@ function submit_with_ajax(url, parametros) {
     var parametros = new FormData();
     token = $('input[name="csrfmiddlewaretoken"]').val();
     parametros.append('action', $('#action').val());
-    parametros.append('nombre_categoria', $("#nombre").val());
+    parametros.append('nombre_marca', $("#nombre").val());
     parametros.append('descripcion', $("#descripcion").val());
-    parametros.append('id', parseInt($("#id_categoria").val()));
+    parametros.append('id', parseInt($("#id_marca").val()));
     parametros.append('imagen', $("#imagen")[0].files[0]);
     parametros.append('csrfmiddlewaretoken',token);
     
@@ -219,10 +219,11 @@ function submit_with_ajax(url, parametros) {
         contentType: false,
         success: function (result) {
             //alert("Correcto");
+            
             if(result.correcto){
-                $('#form_categoria')[0].reset();
-                $("#modalCategoria").modal("hide");
-                tablaCategoria.ajax.reload(null, false);
+                $('#form_marca')[0].reset();
+                $("#modalMarca").modal("hide");
+                tablaMarca.ajax.reload(null, false);
 
                 switch(result.tipo_accion) {
                     case "crear":
@@ -245,13 +246,15 @@ function submit_with_ajax(url, parametros) {
                 });
 
             }else{
-                tablaCategoria.ajax.reload(null, false);
+                tablaMarca.ajax.reload(null, false);
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
                     text: 'Ha ocurrido un error al realizar la acción'
                 });
             }  
+
+         
 
         },
         error: function (error) {
@@ -266,7 +269,7 @@ function submit_with_ajax(url, parametros) {
 
 function obtenerDatos(){
     token = $('input[name="csrfmiddlewaretoken"]').val();
-    tablaCategoria = $('#datatable').DataTable({
+    tablaMarca = $('#datatable').DataTable({
         responsive: true,
         autoWidth: false,
         destroy: true,
@@ -284,8 +287,8 @@ function obtenerDatos(){
         },
         columns: [ //Columnas de nuestro modelo/Tabla aqui retorna o pinta los valores en la datables
             { "data": "id"},  
-            { "data": "nombre_categoria"}, 
-            { "data": "descripcion_categoria"}, 
+            { "data": "nombre_marca"}, 
+            { "data": "descripcion_marca"}, 
             { "data": "id"},//3 esta no existe en los modelos porque son los botones tenemos que personalizarlo
         ],
         columnDefs: [ //Personalizar una columna

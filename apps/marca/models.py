@@ -8,7 +8,7 @@ from distribuidora.settings.local import MEDIA_URL
 
 
 class Marca(models.Model):
-    nombre_marca = models.CharField(max_length=20, verbose_name="Nombre de la categoría", null=False, blank=False)
+    nombre_marca = models.CharField(max_length=20, verbose_name="Nombre de la marca", null=False, blank=False)
     descripcion_marca = models.CharField(max_length=50,default="No",blank = True, null = True, verbose_name="Descripción")
     img_marca = models.ImageField(upload_to='marcas_empresa/',
     verbose_name='Imagen', null=True, blank=True,default='img_defecto.jpg')
