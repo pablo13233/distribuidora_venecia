@@ -7,3 +7,6 @@ from django.views.generic import (
 
 class IndexHomeView(TemplateView):
     template_name = "home/index.html"
+
+class DashboardIndexView(TemplateView):
+    template_name = "dashboard/dashboard_index.html"
