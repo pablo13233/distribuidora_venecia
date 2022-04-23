@@ -1,17 +1,19 @@
 from django.shortcuts import render
 from django.http import JsonResponse 
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required, permission_required #Manejo de permisos
 
 # Create your views here.
 from apps.categoria.models import *
 
 
 
-
+@login_required	
 def categoria_ajax (request):
     if request.method == 'POST' and request.is_ajax():
         data = []
         try:
+           
             action = request.POST['action']
             if action == 'buscardatos':
                 for i in Categoria.objects.all():
@@ -21,7 +23,7 @@ def categoria_ajax (request):
                 ca = Categoria()
                 ca.nombre_categoria = request.POST['nombre_categoria']
                 ca.descripcion_categoria = request.POST['descripcion']         
-                ca.usuario = User.objects.get(pk=1)
+                ca.usuario = User.objects.get(pk=request.user.id)
                 ca.save()
 
                 if request.FILES: 
@@ -45,7 +47,7 @@ def categoria_ajax (request):
                     imagen.name = str(ca.pk)+"_"+imagen.name
                     ca.img_categoria = imagen 
 
-                ca.usuario = User.objects.get(pk=1)
+                #ca.usuario = User.objects.get(pk=1)
                 ca.save()
                 data = {'tipo_accion': 'editar','correcto': True}
 

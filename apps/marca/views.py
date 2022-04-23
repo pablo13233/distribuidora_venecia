@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from django.http import JsonResponse 
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required, permission_required #Manejo de permisos
 
 # Create your views here.
 from apps.marca.models import *
 
 
 
-
+@login_required	
 def marca_ajax (request):
     if request.method == 'POST' and request.is_ajax():
         data = []
@@ -21,7 +22,7 @@ def marca_ajax (request):
                 ma = Marca()
                 ma.nombre_marca = request.POST['nombre_marca']
                 ma.descripcion_marca = request.POST['descripcion']         
-                ma.usuario = User.objects.get(pk=1)
+                ma.usuario = User.objects.get(pk=request.user.id)
                 ma.save()
 
                 if request.FILES: 
@@ -46,7 +47,7 @@ def marca_ajax (request):
                     imagen.name = str(ma.pk)+"_"+imagen.name
                     ma.img_marca = imagen 
 
-                ma.usuario = User.objects.get(pk=1)
+                #ma.usuario = User.objects.get(pk=request.user.id)
                 ma.save()
                 
                 data = {'tipo_accion': 'editar','correcto': True}

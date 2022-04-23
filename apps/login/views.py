@@ -24,7 +24,7 @@ def login(request):
 				return render(request,'login/login.html',ctx)
 		else:
 			mensaje = 'USUARIO O CONTRASEÑA INCORRECTO'
-			ctx = {'mensaje':mensaje}
+			ctx = {'mensaje':mensaje,'username':username}
 			return render(request,'login/login.html',ctx)
 
 

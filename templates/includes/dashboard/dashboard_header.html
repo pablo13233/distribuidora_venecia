@@ -34,14 +34,13 @@
             <li class="nav-item dropdown">
               <a class="nav-link py-0 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="icon-xs bg-gray rounded-circle me-2"><i class="fa fa-user"></i> </span>
-                <span>Profile</span>
+                <span>{{request.user|title}}</span>
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li> <a class="dropdown-item" href="#">Profile</a> </li>
-                <li> <a class="dropdown-item" href="#">Account Settings</a> </li>
-                <li> <a class="dropdown-item" href="#">Newsletter</a> </li>
+                <li> <a class="dropdown-item" href="#">Perfil</a> </li>
+                <li> <a class="dropdown-item" href="#"></a> </li>
                 <li> <hr class="dropdown-divider"> </li>
-                <li> <a class="dropdown-item" href="#">Sign Out</a> </li>
+                <li> <a class="dropdown-item" id="cerrar_sesion" href="#">Salir</a> </li>
               </ul>
             </li>
           </ul>
@@ -50,3 +49,4 @@
       </div>
     </nav> <!-- navbar end.// -->
   </header> <!-- section-header end.// -->
+  

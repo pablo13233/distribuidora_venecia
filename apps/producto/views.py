@@ -1,13 +1,15 @@
+import re
 from django.shortcuts import render
 from django.http import JsonResponse 
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required, permission_required #Manejo de permisos
 
 from apps.marca.models import Marca
 from apps.producto.models import Producto
 from apps.categoria.models import Categoria
 
 # Create your views here.
-
+@login_required	
 def producto_ajax (request):
     if request.method == 'POST' and request.is_ajax():
         data = []
@@ -26,7 +28,7 @@ def producto_ajax (request):
                 if int(request.POST['id_marca']) > 0:
                     pro.marca = Marca.objects.get(pk=request.POST['id_marca'])
 
-                pro.usuario = User.objects.get(pk=1)
+                pro.usuario = User.objects.get(pk=request.user.id)
                 pro.save()
 
                 if request.FILES: 
