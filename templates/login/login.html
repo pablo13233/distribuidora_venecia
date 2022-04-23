@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load  static %}
+
+{% block title %}
+Distribuidora Venecia Login
+{% endblock title %}
+
+{% block content %}
+    <br><br>
+
+    <div class="container">
+
+    <div class="row gy-4 d-flex justify-content-center">
+        <aside class="col-lg-4 col-md-6">
+            <!-- =========== COMPONENT LOGIN 1=========== -->
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="mb-4">Iniciar sesión</h4>
+                    <hr>
+
+                    <center>
+                        <div style="color:#FF0000;"><strong>{{mensaje}}</strong>
+                        </div>
+                    </center>
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Usuario</label>
+                            <input name="username" class="form-control" placeholder="Usuario">
+                        </div> <!-- col end.// -->
+
+                        <div class="mb-3">
+                            <label class="form-label">Contraseña</label>
+                            <input class="form-control" name="pass" placeholder="******" type="password">
+                        </div> <!-- col end.// -->
+                        <br>
+                        <button class="btn w-100 btn-primary" type="submit"> Ingresar </button>
+                            
+                    </form> <!-- form end.// -->
+
+                </div> <!-- card-body end.// -->
+            </div> <!-- card end.// -->
+            <!-- ============= COMPONENT LOGIN 1 END.// ============= -->
+        </aside> <!-- col end.// -->
+    </div> <!-- row end.// -->
+</div>
+
+<br><br>
+{% endblock content %}

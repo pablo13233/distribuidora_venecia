@@ -28,6 +28,8 @@ LOCAL_APPS = (
     'apps.categoria',
     'apps.producto',
     'apps.marca',
+    'apps.login',
+
 )
 
 THIRD_PARTY_APPS = (

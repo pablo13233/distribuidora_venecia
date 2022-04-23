@@ -8,7 +8,7 @@ urlpatterns = [
         admin.site.urls
     ),
     path('', 
-        include('apps.home.urls'),
+        include(('apps.home.urls'), namespace='home'),
     ),
     path('', 
         include(('apps.categoria.urls'), namespace='categoria'),
@@ -16,4 +16,5 @@ urlpatterns = [
     #path('', include('apps.carrusel.urls')),
     path('', include(('apps.producto.urls'), namespace='producto')),
     path('', include(('apps.marca.urls'), namespace='marca')),
+    path('', include(('apps.login.urls'), namespace='login')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
