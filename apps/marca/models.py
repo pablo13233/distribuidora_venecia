@@ -16,7 +16,7 @@ class Marca(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return "{}-{}".format(self.pk,self.nombre_categoria)
+        return "{}-{}".format(self.pk,self.nombre_marca)
 
     def toJSON(self):
         item = model_to_dict(self) #Convertimos todos los objetos en diccionarios
