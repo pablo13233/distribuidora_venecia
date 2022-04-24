@@ -31,6 +31,8 @@ LOCAL_APPS = (
     'apps.marca',
     'apps.login',
     'apps.busqueda',
+    'apps.carrusel',
+
 )
 
 THIRD_PARTY_APPS = (
