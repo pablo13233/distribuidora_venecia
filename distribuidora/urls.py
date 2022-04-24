@@ -18,4 +18,5 @@ urlpatterns = [
     path('', include(('apps.marca.urls'), namespace='marca')),
     path('', include(('apps.login.urls'), namespace='login')),
     path('', include(('apps.busqueda.urls'), namespace='busqueda')),
+    path('', include(('apps.carrusel.urls'), namespace='carrusel')),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

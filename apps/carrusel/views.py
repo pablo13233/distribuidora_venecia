@@ -10,7 +10,7 @@ from .models import Carrusel
 class CarruselListView(ListView):
     template_name = 'carrusel/gestion_carrusel.html'
     model = Carrusel
-    context_object_name = 'carrusels'
+    context_object_name = 'carrusel'
 
 
 
