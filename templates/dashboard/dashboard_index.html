@@ -60,7 +60,10 @@ Administracion
             </div>
             <div class="row no-gutters">
                 <div class="col text-center" >
-                    <img src="{% static 'images\dashboard\carrusel.png' %}" class="btn img-fluid" style="width: auto; height: 150px;" alt="">
+                    <a href="{% url 'carrusel:carrusel_list' %}">
+                        <img src="{% static 'images\dashboard\carrusel.png' %}" class="btn img-fluid" style="width: auto; height: 150px;" alt="">
+                    </a>
+                    
                 </div>
             </div>
         </div>
