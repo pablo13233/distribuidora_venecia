@@ -28,9 +28,12 @@
                     </div>
                 </div> <!-- col end.// -->
                 <div class="col-lg-5 col-md-4 col-12">
-                    <form action="#">
+                    <form action="{% url 'busqueda_app:busqueda_producto' %}" method="GET">
                         <div class="input-group w-100">
-                            <input type="text" class="form-control" placeholder="Search" style="width:55%;">
+                            <input type="text" name="busqueda" class="form-control" 
+                            placeholder="¿Qué está buscando?"
+                            value="{{ request.GET.busqueda }}" id="busqueda" style="width:55%;">
+
                             <button class="btn btn-light">
                                 <i class="fa fa-search"></i>
                             </button>

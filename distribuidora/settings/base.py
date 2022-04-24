@@ -20,6 +20,7 @@ DJANGO_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap_pagination'
 )
 
 LOCAL_APPS = (
@@ -29,7 +30,7 @@ LOCAL_APPS = (
     'apps.producto',
     'apps.marca',
     'apps.login',
-
+    'apps.busqueda',
 )
 
 THIRD_PARTY_APPS = (
