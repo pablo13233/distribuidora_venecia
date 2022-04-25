@@ -77,7 +77,7 @@ def gestion_carrusel_ajax (request):
 
         except Exception as e:
             data['error'] = str(e)
-            data = {'tipo_accion': 'error', 'correcto': False, 'error': str(e)}
+            data = {'tipo_accion': 'error','correcto': False, 'error': str(e)}
         return JsonResponse(data,safe=False)
     elif request.method =="GET":
         return render(request, 'carrusel/gestion_carrusel.html')
