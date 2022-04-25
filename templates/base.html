@@ -27,7 +27,12 @@
 <body class="bg-light">
 
     <!-- ================ HEADER ================ -->
-    {% include 'includes/header.html' %}
+
+    
+    {% block header %}
+        
+    {% endblock header %}
+        
     <!-- ================ HEADER END.// ================ -->
 
     {% block content %}
