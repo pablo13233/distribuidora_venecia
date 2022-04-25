@@ -337,7 +337,10 @@ Administración de Carrusel
         $('#descripcion_Carrusel').val(data.descripcion_Carrusel);
         $('#direccion_Carrusel').val(data.direccion_Carrusel);
         $('#estado_Carrusel').val(data.estado_Carrusel);
-        
+        //alert(data.estado_Carrusel);
+        //console.log(data.estado_Carrusel);
+        //console.log(data.imagen_Carrusel);
+        //$('#imagen').val(data.imagen_Carrusel);
 
 
         $('#modalCarrusel').modal('show');
@@ -365,7 +368,7 @@ Administración de Carrusel
     }).on('click', 'a[rel="verImagen"]', function(){
         var tr = tablaCarrusel.cell($(this).closest('td, li')).index();
         var data = tablaCarrusel.row(tr.row).data();
-        //console.log(data.img_categoria);
+        //console.log(data.imagen_Carrusel);
         $("#id_imagen").attr("src", data.imagen_Carrusel);
         $("#modalImagen").modal("show");
     });
