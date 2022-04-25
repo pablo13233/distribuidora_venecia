@@ -22,9 +22,10 @@ Administración de Carrusel
                     <th>Nº</th>
                     <th>Nombre</th>
                     <th>Descripción</th>
-                    <th>Imagen</th>
-                    <th>Estado</th>
                     <th>Dirección</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                    
                     
                  </tr>
                </thead>
@@ -89,9 +90,9 @@ Administración de Carrusel
                   <div class="col-md-6" >
                       <label for="">Estado</label>
                       <select name="estado_Carrusel" id="estado_Carrusel" class="form-control">
-                          <option value="0">--Seleccione--</option>
-                          <option value="1">Activo</option>
-                          <option value="2">Inactivo</option>
+                          <option value="">--Seleccione--</option>
+                          <option value="True">Activo</option>
+                          <option value="False">Inactivo</option>
                           
                       </select>
                       <br>
@@ -147,7 +148,7 @@ Administración de Carrusel
     //==================================================Carga de Pagina Gestion Carrusel========================================================
 
     var modalTitulo = $('.modal-title');
-
+    var tablaCarrusel;
 
     window.onload = function(){
         
@@ -159,7 +160,7 @@ Administración de Carrusel
             $('#form_carrusel')[0].reset();
             $('#direccion_Carrusele').val("");
             $('#direccion_Carrusel').val("");
-            $('#estado_Carrusel').val(0);
+            $('#estado_Carrusel').val("");
             $('#nombre').val("");
 
             $('#nombre').focus();
@@ -195,8 +196,8 @@ Administración de Carrusel
                 { "data": "id"},  
                 { "data": "nombre_Carrusel"}, 
                 { "data": "descripcion_Carrusel"}, 
-                { "data": "estado_Carrusel"}, 
                 { "data": "direccion_Carrusel"}, 
+                { "data": "estado_Carrusel"}, 
                 { "data": "id"},//3 esta no existe en los modelos porque son los botones tenemos que personalizarlo
             ],
             columnDefs: [ //Personalizar una columna
@@ -232,7 +233,7 @@ Administración de Carrusel
     }else if($( "#descripcion_Carrusel" ).val() == ""){
         alert("Falta la Descripción de la imagen");
 
-    }else if($( "#estado_Carrusel" ).val() == 0){
+    }else if($( "#estado_Carrusel" ).val() == ""){
         alert("Seleccione un estado de la imagen");
 
     }else{
@@ -277,7 +278,7 @@ Administración de Carrusel
                 if(result.correcto){
                     $('#form_carrusel')[0].reset();
                     $("#modalCarrusel").modal("hide");
-                    tablaProducto.ajax.reload(null, false);
+                    tablaCarrusel.ajax.reload(null, false);
     
                     switch(result.tipo_accion) {
                         case "crear":
@@ -300,7 +301,7 @@ Administración de Carrusel
                     });
     
                 }else{
-                    tablaProducto.ajax.reload(null, false);
+                  tablaCarrusel.ajax.reload(null, false);
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
@@ -321,7 +322,7 @@ Administración de Carrusel
     
   //=================================================Data table=============================================================
 
-  var tablaCarrusel;
+  
 
   $('#datatable tbody').on('click', 'a[rel="editar"]', function () {
         var tr = tablaCarrusel.cell($(this).closest('td, li')).index();
