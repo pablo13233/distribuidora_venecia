@@ -1,0 +1,175 @@
+{% extends "dashboard/dashboard_base.html" %}
+
+{% load  static %}
+
+{% block title %}
+Administración de Carrusel
+{% endblock title %}
+
+{% block content %}
+
+  <div class="container-fluid">  
+
+
+    <div class="d-flex justify-content-center col-12 mb-4 ">
+      <h3 class="mt-4">Imagenes del Carrusel</h3>
+    </div>
+    
+    <div class="table-responsive shadow p-4 mb-4 bg-white rounded">
+      <table class="table table-hover" id="datatable">
+               <thead>
+                 <tr>
+                    <th>Nº</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Imagen</th>
+                    <th>Estado</th>
+                    <th>Dirección</th>
+                    
+                 </tr>
+               </thead>
+                <tbody>
+
+                </tbody>
+        </table>
+
+        <div class="col-2">
+            <button type="button" class="form-control btn btn-success btn-sm" id="btnAdd">
+              <i class="fa-solid fa-plus"></i>
+              Agregar Imagen
+            </button>
+        </div>
+    </div>
+  </div>
+<!-- Inicio Modal Agregar Producto -->
+<div class="modal fade" id="modalCarrusel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      
+  <div class="modal-dialog modal-dialog-centered" role="document">
+
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <h5 class="modal-title" id="">
+          <i class="fa-solid fa-plus"></i> <span>Crear Producto</span></h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+
+          <form method="post" action="." id="form_carruel" enctype="multipart/form-data">
+              <div class="form-group row">
+                  {% csrf_token %}
+                  <input type="text" class="d-none" name="action" id="action" value="crear" />
+                  <input type="text" class="d-none" id="id_producto" value="0" />
+                
+                  <div class="col-md-12">
+                    <div class="form-group row">
+                      <div class="col-md-1">
+                        <label for="" >Nº</label>
+                      </div>
+                      <div class="col-md-2">
+                        <input type="text" class="form-control" name="num" id="num" required readonly/>
+                      </div>
+                    </div>
+                </div>
+
+                 
+
+                  <div class="col-md-12">
+                      <label for="">Nombre</label>
+                      <input type="text" class="form-control" name="nombre" id="nombre" required placeholder="Nombre de la imagen"/>
+                  </div>
+              </div>
+
+              <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="">Dirección</label>
+                    <input type="text" class="form-control" name="Direccion" id="Direccion" required placeholder="Referencia de busqueda"/>
+                    <br>
+                  </div>
+                  <div class="col-md-12">
+                    <label for="">Descripción</label>
+                    <textArea id="descripcion" name="descripcion" class="form-control "placeholder="Descripción de la imagen" style="resize: none">
+                      <br>
+                    </textArea>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                  <div class="col-md-6" >
+                      <label for="">Estado</label>
+                      <select name="categoria" id="categoria" class="form-control">
+                          <option value="0">--Seleccione--</option>
+                          
+                      </select>
+                      <br>
+                  </div>
+                  
+              </div>
+              
+              <div class="form-group row " >
+                
+                  <div class="col-md-12">
+                      
+                      
+                      <label for="">Imagen</label>
+                      <input type="file" id="imagen" name="imagen" accept="image/*">
+                      <br><br>
+                      <label for="" style="color:#939393;">El tamaño de la imagen  no debe ser mayor a 2mb (1920x450 px)</label>
+
+                     
+                     
+                  </div>
+              </div>
+          </form>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary" id="btn">Guardar</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<!-- Fin Modal Agregar carrusel -->
+
+  <!-- Inicio modal ver/editar imagen-->
+  <div class="modal fade" id="modalImagen">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <img src="" class="img-responsive" style="width: 100%; heigth: 100%;" id="id_imagen">
+        </div>
+    </div>
+</div>
+<!-- Fin modal ver/editar imagen-->
+
+
+
+  <script>
+    var tablaProducto;
+    var modalTitulo = $('.modal-title');
+    window.onload = function(){
+        
+        //alert("Pagina cargada");
+        $("#btnAdd").on("click", function(){
+            modalTitulo.find('span').html('Agregar Imagen');
+            modalTitulo.find('i').removeClass().addClass('fas fa-plus');
+            $('#action').val("crear");
+            $('#form_carruel')[0].reset();
+            $('#descripcion').val("");
+            $('#nombre').focus();
+            
+            $('#modalCarrusel').modal('show');
+        });
+        $('#datatable').DataTable();
+        obtenerDatos();
+    }
+
+  </script>
+{% endblock content %}
