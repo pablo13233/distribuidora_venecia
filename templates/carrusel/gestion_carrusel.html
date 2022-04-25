@@ -62,20 +62,8 @@ Administración de Carrusel
               <div class="form-group row">
                   {% csrf_token %}
                   <input type="text" class="d-none" name="action" id="action" value="crear" />
-                  <input type="text" class="d-none" id="id_producto" value="0" />
-                
-                  <div class="col-md-12">
-                    <div class="form-group row">
-                      <div class="col-md-1">
-                        <label for="" >Nº</label>
-                      </div>
-                      <div class="col-md-2">
-                        <input type="text" class="form-control" name="num" id="num" required readonly/>
-                      </div>
-                    </div>
-                </div>
-
-                 
+                  <input type="text" class="d-none" id="id_carrusel" value="0" />
+                            
 
                   <div class="col-md-12">
                       <label for="">Nombre</label>
@@ -86,7 +74,7 @@ Administración de Carrusel
               <div class="form-group row">
                   <div class="col-md-12">
                     <label for="">Dirección</label>
-                    <input type="text" class="form-control" name="Direccion" id="Direccion" required placeholder="Referencia de busqueda"/>
+                    <input type="text" class="form-control" name="direccion_Carrusele" id="direccion_Carrusele" required placeholder="Referencia de busqueda"/>
                     <br>
                   </div>
                   <div class="col-md-12">
@@ -100,12 +88,15 @@ Administración de Carrusel
               <div class="form-group row">
                   <div class="col-md-6" >
                       <label for="">Estado</label>
-                      <select name="categoria" id="categoria" class="form-control">
+                      <select name="estado_Carrusel" id="estado_Carrusel" class="form-control">
                           <option value="0">--Seleccione--</option>
+                          <option value="1">Activo</option>
+                          <option value="2">Inactivo</option>
                           
                       </select>
                       <br>
                   </div>
+                 
                   
               </div>
               
@@ -152,7 +143,7 @@ Administración de Carrusel
 
 
   <script>
-    var tablaProducto;
+    
     var modalTitulo = $('.modal-title');
     window.onload = function(){
         
@@ -170,6 +161,102 @@ Administración de Carrusel
         $('#datatable').DataTable();
         obtenerDatos();
     }
+  //=================================================Data table=============================================================
 
+  var tablaCarrusel;
+
+  $('#datatable tbody').on('click', 'a[rel="editar"]', function () {
+        var tr = tablaCarrusel.cell($(this).closest('td, li')).index();
+        var data = tablaCarrusel.row(tr.row).data();
+
+        modalTitulo.find('span').html('Editar producto');
+        modalTitulo.find('i').removeClass().addClass('fas fa-edit');
+
+        $('#action').val("editar");
+        $('#id_carrusel').val(data.id);
+        $('#nombre').val(data.nombre_Carrusel);
+        $('#descripcion').val(data.descripcion_Carrusel);
+        $('#estado_Carrusel').val(data.estado_Carrusel);
+        $('#direccion_Carrusele').val(data.direccion_Carrusele);
+
+
+        $('#modalCarrusel').modal('show');
+    }).on('click', 'a[rel="eliminar"]', function (){
+        var tr = tablaCarrusel.cell($(this).closest('td, li')).index();
+        var data = tablaCarrusel.row(tr.row).data();
+
+        $('#action').val("eliminar");
+        $('#id_carrusel').val(data.id);
+
+        Swal.fire({
+            title: `¿Esta seguro de eliminar el registro Nro ${data.id}?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                submit_with_ajax("","");
+            }
+          });
+
+    }).on('click', 'a[rel="verImagen"]', function(){
+        var tr = tablaCarrusel.cell($(this).closest('td, li')).index();
+        var data = tablaCarrusel.row(tr.row).data();
+        //console.log(data.img_categoria);
+        $("#id_imagen").attr("src", data.imagen_Carrusel);
+        $("#modalImagen").modal("show");
+    });
+
+
+//==================================================Obtener Datos===========================================================
+    function obtenerDatos(){
+        token = $('input[name="csrfmiddlewaretoken"]').val();
+        tablaCarrusel = $('#datatable').DataTable({
+            responsive: true,
+            autoWidth: false,
+            destroy: true,
+            bSortable: true,
+            deferRender: true,
+            language: { "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json" },
+            ajax: {
+                url: window.location.pathname,//Obtenemos la url obsoluta
+                type: 'POST',
+                data: {
+                    'action': 'buscardatos', //Mandamos la accion para que django sepa que tiene que buscar
+                    'csrfmiddlewaretoken': token
+                }, // parametros
+                dataSrc: ""
+            },
+            columns: [ //Columnas de nuestro modelo/Tabla aqui retorna o pinta los valores en la datables
+                { "data": "id"},  
+                { "data": "nombre_Carrusel"}, 
+                { "data": "descripcion_Carrusel"}, 
+                { "data": "estado_Carrusel"}, 
+                { "data": "direccion_Carrusele"}, 
+                { "data": "id"},//3 esta no existe en los modelos porque son los botones tenemos que personalizarlo
+            ],
+            columnDefs: [ //Personalizar una columna
+                {
+                    targets: [5], //Personalizar la colummna numero 3
+                    class: 'text-center',
+                    orderable: false,
+                    render: function (data, type, row) {
+                        var buttons = `<a  rel="verImagen" class='btn btn-success btn-sm btn-flat test-popup-link'>
+                            <i class="fa-solid fa-file-image"></i></a> `;
+
+                            buttons += `<a rel="editar" class="btn btn-warning btn-sm btn-flat">
+                                        <i class="fas fa-edit"></i></a> `;
+
+                            buttons += `<a  rel="eliminar" class='btn btn-danger btn-sm btn-flat'>
+                                        <i class="fa-solid fa-trash-can"></i></a>`;
+                            return buttons;
+                    }
+                },
+            ],
+        });
+    }
   </script>
 {% endblock content %}

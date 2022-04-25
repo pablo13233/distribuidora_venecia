@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required #Manejo de permisos
 from django.views.generic import(ListView,CreateView,TemplateView,UpdateView,DetailView,DeleteView)
+from django.shortcuts import HttpResponse
 
 from apps.carrusel.models import Carrusel
 
@@ -13,7 +14,7 @@ from apps.carrusel.models import Carrusel
 
 @login_required
 def gestion_carrusel_ajax (request):
-    if request.method == 'POST' and request.is_ajasx():
+    if request.method == 'POST' and request.is_ajax():
         data = []
         try:
             action = request.POST['action']
@@ -81,17 +82,3 @@ def gestion_carrusel_ajax (request):
     elif request.method =="GET":
         return render(request, 'carrusel/gestion_carrusel.html')
     
-
-
-
-
-
-class CarruselListView(ListView):
-    model = Carrusel
-    template_name = 'carrusel/gestion_carrusel.html'
-    context_object_name = 'carrusel'
-
-
-
-
-
