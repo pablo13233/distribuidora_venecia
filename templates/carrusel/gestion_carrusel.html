@@ -255,7 +255,7 @@ Administración de Carrusel
         parametros.append('estado_Carrusel', $( "#estado_Carrusel" ).val());
 
 
-        //parametros.append('id', parseInt($("#id_carrusel").val()));
+        parametros.append('id', parseInt($("#id_carrusel").val()));
         
 
 
@@ -335,8 +335,9 @@ Administración de Carrusel
         $('#id_carrusel').val(data.id);
         $('#nombre').val(data.nombre_Carrusel);
         $('#descripcion_Carrusel').val(data.descripcion_Carrusel);
-        $('#estado_Carrusel').val(data.estado_Carrusel);
         $('#direccion_Carrusel').val(data.direccion_Carrusel);
+        $('#estado_Carrusel').val(data.estado_Carrusel);
+        
 
 
         $('#modalCarrusel').modal('show');

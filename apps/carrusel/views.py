@@ -69,7 +69,7 @@ def gestion_carrusel_ajax (request):
                     dato_Carrusel.imagen_Carrusel.delete()
 
                 dato_Carrusel.delete()
-                data = {'tipo_accion': 'eliminar', 'correcto': True}
+                data = {'tipo_accion': 'eliminar','correcto': True}
             else:
                 data['error'] = 'Ha ocurrido un error'
             
