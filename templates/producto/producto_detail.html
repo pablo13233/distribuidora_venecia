@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% load  static %}
+
+{% block title %}
+Distribuidora Venecia
+{% endblock title %}
+
+{% block content %}
+<section class="bg-light padding-y-sm">
+
+    <!-- ============== SECTION CONTENT ============== -->
+    <section class="padding-y">
+        <div class="container">
+
+            <div class="row">
+                <aside class="col-lg-6">
+                    <article class="gallery-wrap">
+                        <div class="img-big-wrap img-thumbnail">
+                            <a data-fslightbox="mygalley" data-type="image" href="{{ productoids.img_producto.url }}">
+                                <img height="560" src="{{ producto.img_producto.url }}" class="img-fluid"
+                                style="width: auto; height: 560px;" alt="">
+                            </a>
+                            <!-- </div> img-big-wrap.//
+        <div class="thumbs-wrap">
+          <a data-fslightbox="mygalley" data-type="image" href="images/items/detail1/big1.jpg" class="item-thumb"> 
+            <img width="60" height="60" src="images/items/detail1/thumb1.jpg"> 
+          </a>
+          <a data-fslightbox="mygalley" data-type="image" href="images/items/detail1/big2.jpg" class="item-thumb"> 
+            <img width="60" height="60" src="images/items/detail1/thumb2.jpg">  
+          </a>
+          <a data-fslightbox="mygalley" data-type="image" href="images/items/detail1/big3.jpg" class="item-thumb"> 
+            <img width="60" height="60" src="images/items/detail1/thumb3.jpg">  
+          </a>
+          <a data-fslightbox="mygalley" data-type="image" href="images/items/detail1/big4.jpg" class="item-thumb"> 
+            <img width="60" height="60" src="images/items/detail1/thumb4.jpg">  
+          </a>
+          <a data-fslightbox="mygalley" data-type="image" href="images/items/detail1/big.jpg" class="item-thumb"> 
+            <img width="60" height="60" src="images/items/detail1/thumb.jpg">  
+          </a>
+        </div> thumbs-wrap.// -->
+                    </article> <!-- gallery-wrap .end// -->
+                </aside>
+                <main class="col-lg-6">
+                    <article class="ps-lg-3">
+                        <h4 class="title text-dark">{{ producto.nombre_producto }} </h4>
+                        <!-- <div class="mb-3"> 
+          <var class="price h5">Lps. {{ productoids.precio }}</var> 
+          <span class="text-muted">/Unidad</span> 
+        </div>  -->
+                        <!-- {{ producto. }} -->
+
+                        <dl class="row padding-y">
+                            <dt class="col-3">Marca:</dt>
+                            <dd class="col-9">{{ producto.marca.nombre_marca }}</dd>
+
+                            <dt class="col-3">Modelo:</dt>
+                            <dd class="col-9">{{ producto.modelo }}</dd>
+
+                            <dt class="col-3">Categoria:</dt>
+                            <dd class="col-9">{{ producto.categoria.nombre_categoria }}</dd>
+                            
+                            <dt class="col-3">Descripción:</dt>
+                            <dd class="col-9">{{ producto.descripcion_producto }}</dd>
+                            
+                        </dl>
+                    </article> <!-- product-info-aside .// -->
+                </main> <!-- col.// -->
+            </div> <!-- row.// -->
+
+        </div> <!-- container .//  -->
+    </section>
+    <!-- ============== SECTION CONTENT END// ============== -->
+
+    <!-- ============== SECTION  ============== -->
+    <!-- <section class="padding-y bg-light border-top">
+        <div class="container">
+            <div class="row">
+                <aside class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Similar items</h5>
+
+                            <article class="itemside mb-3">
+                                <a href="#" class="aside">
+                                    <img src="images/items/8.jpg" width="96" height="96" class="img-md img-thumbnail">
+                                </a>
+                                <div class="info">
+                                    <a href="#" class="title mb-1"> Rucksack Backpack Large <br> Line Mounts </a>
+                                    <strong class="price"> $38.90</strong>
+                                </div>
+                            </article>
+
+                            <article class="itemside mb-3">
+                                <a href="#" class="aside">
+                                    <img src="images/items/9.jpg" width="96" height="96" class="img-md img-thumbnail">
+                                </a>
+                                <div class="info">
+                                    <a href="#" class="title mb-1"> Summer New Men's Denim <br> Jeans Shorts </a>
+                                    <strong class="price"> $29.50</strong>
+                                </div>
+                            </article>
+
+                            <article class="itemside mb-3">
+                                <a href="#" class="aside">
+                                    <img src="images/items/10.jpg" width="96" height="96" class="img-md img-thumbnail">
+                                </a>
+                                <div class="info">
+                                    <a href="#" class="title mb-1"> T-shirts with multiple colors, for men and lady </a>
+                                    <strong class="price"> $120.00</strong>
+                                </div>
+                            </article>
+
+                            <article class="itemside mb-3">
+                                <a href="#" class="aside">
+                                    <img src="images/items/11.jpg" width="96" height="96" class="img-md img-thumbnail">
+                                </a>
+                                <div class="info">
+                                    <a href="#" class="title mb-1"> Blazer Suit Dress Jacket for Men, Blue color </a>
+                                    <strong class="price"> $339.90</strong>
+                                </div>
+                            </article>
+
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section> -->
+    <!-- =============== SECTION  END// ============== -->
+
+    {% endblock content %}

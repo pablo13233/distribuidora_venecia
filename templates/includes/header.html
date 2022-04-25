@@ -16,23 +16,13 @@
                             <i class="fa me-lg-1 fa-phone text-primary"></i>
                             <span class="text-primary d-none d-lg-inline-block">+504 8900-3488</span>
                         </a>
-                        <!-- <a href="#" class="btn btn-light"> 
-			                <i class="fa fa-heart text-primary"></i>
-			              </a>
-			              <a href="#" class="btn btn-light"> 
-			                <i class="fa fa-user text-primary"></i>
-			              </a>
-			              <a href="#" class="btn btn-primary"> 
-			                <i class="me-1 fa fa-plus-circle"></i> Add item  
-			              </a> -->
                     </div>
                 </div> <!-- col end.// -->
                 <div class="col-lg-5 col-md-4 col-12">
                     <form action="{% url 'busqueda_app:busqueda_producto' %}" method="GET">
                         <div class="input-group w-100">
-                            <input type="text" name="busqueda" class="form-control" 
-                            placeholder="¿Qué está buscando?"
-                            value="{{ request.GET.busqueda }}" id="busqueda" style="width:55%;">
+                            <input type="text" name="busqueda" class="form-control" placeholder="¿Qué está buscando?"
+                                value="{{ request.GET.busqueda }}" id="busqueda" style="width:55%;">
 
                             <button class="btn btn-light">
                                 <i class="fa fa-search"></i>
@@ -59,13 +49,13 @@
                         <a class="nav-link ps-0" href="#" data-bs-toggle="dropdown"> <i class="fa fa-bars"></i>
                             Categorias </a>
                         <ul class="dropdown-menu">
-                            <li> <a class="dropdown-item" href="#">Categoria 1 </a> </li>
-                            <li> <a class="dropdown-item" href="#">Categoria 2</a> </li>
-                            <li> <a class="dropdown-item" href="#">Categoria 3</a> </li>
+                            {% for cat in cat_menus %}
+                            <li> <a class="dropdown-item" href="#">{{cat.nombre_categoria}} </a> </li>
+                            {% endfor %}
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Ofertas</a>
+                        <a class="nav-link" href="{% url 'producto_app:producto_all' %}">Productos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Temporada</a>

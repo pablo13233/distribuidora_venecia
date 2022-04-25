@@ -8,6 +8,10 @@ from apps.marca.models import Marca
 from apps.producto.models import Producto
 from apps.categoria.models import Categoria
 
+#importacion para clases de
+from django.views.generic import ListView, DetailView, TemplateView
+
+
 # Create your views here.
 @login_required	
 def producto_ajax (request):
@@ -79,3 +83,40 @@ def producto_ajax (request):
         categorias = Categoria.objects.all()
         marcas = Marca.objects.all()
         return render(request, 'producto/crear_producto.html',{'categorias':categorias,'marcas':marcas})
+
+# clases par vistas
+class ProductoLastList(TemplateView):
+    template_name = 'producto/producto_last.html'
+    context_object_name = 'productos'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['productos'] = Producto.objects.all().order_by('-pk')[:8]
+        return context
+
+
+class ProductosListView(ListView):
+    template_name = "producto/productos_all.html"
+    model = Producto
+    paginate_by = 12
+    ordering = 'nombre_producto'
+    context_object_name = 'productos'
+    
+    def get_queryset(self):
+        palabra = self.request.GET.get('kword', '')
+        lista = Producto.objects.filter(
+            nombre_producto__icontains=palabra
+        )
+        return lista
+
+
+
+
+class ProductDetailView(DetailView):
+    model = Producto
+    template_name = 'producto/producto_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ProductDetailView, self).get_context_data(**kwargs)
+        context['producto'] = Producto.objects.get(pk=self.kwargs['pk'])
+        return context

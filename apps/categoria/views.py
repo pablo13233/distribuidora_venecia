@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.http import JsonResponse 
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, permission_required #Manejo de permisos
-
+#importacion para clases de
+from django.views.generic import ListView
+from django.forms import ModelForm
 # Create your views here.
 from apps.categoria.models import *
 
@@ -70,3 +72,8 @@ def categoria_ajax (request):
         return render(request, 'categoria/crear_categoria.html',{'titulo':'Inicio','entidad':'Creacion de categorias'})
 
 
+
+def categoriaList(request):
+    cat_menu  = Categoria.objects.all()
+    return render(request, 'includes/header.html',{'cat_menus': cat_menu})
+    
