@@ -6,6 +6,6 @@ app_name = "busqueda_app"
 
 
 urlpatterns = [
-     path("productos", busqueda_producto, name="busqueda_producto"),
+     path("productosq", busqueda_producto, name="busqueda_producto"),
      path('productos/<int:id_categoria>/',busqueda_categoria, name='busqueda_categoria'),
 ]
