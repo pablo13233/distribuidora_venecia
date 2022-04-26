@@ -50,7 +50,7 @@
                         <a class="nav-link ps-0" href="#" data-bs-toggle="dropdown"> <i class="fa fa-bars"></i>
                             Categorias </a>
                         <ul class="dropdown-menu">
-                            {% for cat in categoria_list %}
+                            {% for cat in ctx_categorias %}
                             <li> <a class="dropdown-item" href="#">{{ cat.nombre_categoria }} </a> </li>
                             {% endfor %}
                         </ul>
