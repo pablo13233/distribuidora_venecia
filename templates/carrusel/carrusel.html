@@ -11,14 +11,15 @@
 	
 		
 	
+	
 
 	<div id="carouselExampleIndicators" id="myCarousel" class="carousel slide" data-bs-ride="carousel">
 
 		<!--contador/ubicador de carrusel-->
-		<div class="carousel-indicators">
+		<div class="carousel-indicators" >
 
 			{% for dato in imagenes_carrusel %}
-			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}"
+			<button style="display: block; width: 15px; height: 15px; border-radius: 50%;" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}"
 				class="{% if forloop.first %} active {% endif %}" aria-current="{% if forloop.first %} true {% endif %}" aria-label="Slide {{ forloop.counter }}"></button>
 			{% endfor %}
 		</div>
@@ -36,13 +37,14 @@
 
 
 		<!--boton izquiedo-->
-		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+		
+		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" style="display: block; width: 50px; height: 50px; border-radius: 50%;"
 			data-bs-slide="prev">
 			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 			<span class="visually-hidden">Previous</span>
 		</button>
 		<!--boton derecho-->
-		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" style="display: block; width: 50px; height: 50px; border-radius: 50%;"
 			data-bs-slide="next">
 			<span class="carousel-control-next-icon" aria-hidden="true"></span>
 			<span class="visually-hidden">Next</span>
@@ -101,7 +103,7 @@
 		}
 		var myCarousel = document.querySelector('#myCarousel')
 		var carousel = new bootstrap.Carousel(myCarousel, {
-			interval: 2000,
+			interval: 2500,
 			wrap: false
 		})
 	</script>
