@@ -1,7 +1,6 @@
+from apps.categoria.models import *
+
 def categoria_list(request):
-    context_data = dict()
+    categorias = Categoria.objects.all()
     
-"""             context_data["cc_secciones"] = Section.objects.filter(
-                parentisnull=True, publish=True, groupin=user_groups
-            ).order_by("order")
-    return context_data """
+    return {'ctx_categorias':categorias}

@@ -73,9 +73,9 @@ def categoria_ajax (request):
 
 
 # View de categorias
-def categoria_list(request):
+""" def categoria_list(request):
     context  = {
         'alv' : Categoria.objects.all()
     }
     return render(request, 'includes/header.html', context=context)
-    
+     """
