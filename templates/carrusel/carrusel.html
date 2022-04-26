@@ -1,47 +1,101 @@
 {% load static %}
 
-<section class="section-intro  padding-y-lg">
-	
+<section class="section-intro  ">
 
-		<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+	<!-- Wrapper for slides -->
 
-			<!--contador/ubicador de carrusel-->
-			<div class="carousel-indicators">
-			  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-			  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-			  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+	<div id="carouselExampleIndicators" id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+
+		<!--contador/ubicador de carrusel-->
+		<div class="carousel-indicators">
+
+			{% for dato in imagenes_carrusel %}
+			<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}"
+				class="{% if forloop.first %} active {% endif %}" aria-current="{% if forloop.first %} true {% endif %}" aria-label="Slide {{ forloop.counter }}"></button>
+			{% endfor %}
+		</div>
+
+		<!--imagenes del carrusel-->
+		<div class="carousel-inner">
+
+			{% for dato in imagenes_carrusel %}
+			<div class="carousel-item {% if forloop.first %} active {% endif %}">
+				<img src="{{ dato.imagen_Carrusel.url}}" class="d-block w-100" alt="..." style=" width: 100%; height: 450px;">
 			</div>
+			{% endfor %}
+		</div>
+
+
+		<!--boton izquiedo-->
+		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+			data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Previous</span>
+		</button>
+		<!--boton derecho-->
+		<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+			data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="visually-hidden">Next</span>
+		</button>
+
+
+	</div>
+
+
+
+	<!--
+
+			<div id="carouselExampleIndicators" id="myCarousel"class="carousel slide" data-bs-ride="carousel">
 
 			
-			<div class="carousel-inner">
-			  <div class="carousel-item active">
-				<img src="{% static 'images/dashboard/carousel-1.png' %}" class="d-block w-100" alt="...">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
 			  </div>
-			  <div class="carousel-item">
-				<img src="{% static 'images/dashboard/carousel-2.png' %}" class="d-block w-100" alt="...">
+  
+			  
+			  <div class="carousel-inner">
+				<div class="carousel-item active">
+				  <img src="{% static 'images/dashboard/carousel-1.png' %}" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+				  <img src="{% static 'images/dashboard/carousel-2.png' %}" class="d-block w-100" alt="...">
+				</div>
+				<div class="carousel-item">
+				  <img src="{% static 'images/dashboard/carousel-3.png' %}" class="d-block w-100" alt="...">
+				</div>
 			  </div>
-			  <div class="carousel-item">
-				<img src="{% static 'images/dashboard/carousel-3.png' %}" class="d-block w-100" alt="...">
-			  </div>
+  
+  
+			  
+			  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			  </button>
+			  
+			  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			  </button>
+  
+  
 			</div>
+		-->
 
 
-			<!--boton izquiedo-->
-			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-			  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			  <span class="visually-hidden">Previous</span>
-			</button>
-			<!--boton derecho-->
-			<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-			  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-			  <span class="visually-hidden">Next</span>
-			</button>
+	<script>
+		window.onload = function () {
+			//alert("Pagina cargada");
 
-
-		  </div>
-
-
+		}
+		var myCarousel = document.querySelector('#myCarousel')
+		var carousel = new bootstrap.Carousel(myCarousel, {
+			interval: 2000,
+			wrap: false
+		})
+	</script>
 
 
 </section>
-

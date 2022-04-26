@@ -15,10 +15,11 @@ class IndexHomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         productos = Producto.objects.all().order_by('pk')[:8]
-        carrusel = Carrusel.objects.all().order_by('pk')[:3]
-        context['imagenes'] = carrusel
+        carrusel = Carrusel.objects.all().order_by('estado_Carrusel')
+        context['imagenes_carrusel'] = carrusel
         context['last_productos'] = productos
         return context
 
 class DashboardIndexView(TemplateView):
     template_name = "dashboard/dashboard_index.html"
+

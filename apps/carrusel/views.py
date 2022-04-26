@@ -17,6 +17,7 @@ def gestion_carrusel_ajax (request):
     if request.method == 'POST' and request.is_ajax():
         data = []
         try:
+            #========================   select   =========================
             action = request.POST['action']
             if action =='buscardatos':
                 for i in Carrusel.objects.all():
@@ -81,4 +82,13 @@ def gestion_carrusel_ajax (request):
         return JsonResponse(data,safe=False)
     elif request.method =="GET":
         return render(request, 'carrusel/gestion_carrusel.html')
+
+#Clases para vistas
+
+
+class CarruselListView(ListView):
+    template_name = "carrusel/carrusel.html"
+    model = Carrusel
+    context_object_name = 'carrusel_list'
+    
     
