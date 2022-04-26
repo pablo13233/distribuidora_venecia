@@ -7,6 +7,22 @@ Distribuidora Venecia
 {% endblock title %}
 
 {% block content %}
+
+<!-- ============== SECTION PAGETOP ============== -->
+
+<section class="bg-primary py-5">
+    <div class="container">
+        <h2 class="text-white">Distribuidora Venecia</h2>
+        <ol class="breadcrumb ondark mb-0">
+            <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'producto_app:producto_all' %}">Producto</a></li>
+            <li class="breadcrumb-item">Producto: {{ producto.nombre_producto }}</li>
+        </ol>
+    </div> <!-- container //  -->
+</section>
+<!-- ============== SECTION PAGETOP END// ============== -->
+<br>
+<!-- ============== SECTION CONTENT ============== -->
 <section class="bg-light padding-y-sm">
 
     <!-- ============== SECTION CONTENT ============== -->
@@ -19,7 +35,7 @@ Distribuidora Venecia
                         <div class="img-big-wrap img-thumbnail">
                             <a data-fslightbox="mygalley" data-type="image" href="{{ productoids.img_producto.url }}">
                                 <img height="560" src="{{ producto.img_producto.url }}" class="img-fluid"
-                                style="width: auto; height: 560px;" alt="">
+                                    style="width: auto; height: 560px;" alt="">
                             </a>
                             <!-- </div> img-big-wrap.//
         <div class="thumbs-wrap">
@@ -59,10 +75,10 @@ Distribuidora Venecia
 
                             <dt class="col-3">Categoria:</dt>
                             <dd class="col-9">{{ producto.categoria.nombre_categoria }}</dd>
-                            
+
                             <dt class="col-3">Descripción:</dt>
                             <dd class="col-9">{{ producto.descripcion_producto }}</dd>
-                            
+
                         </dl>
                     </article> <!-- product-info-aside .// -->
                 </main> <!-- col.// -->
