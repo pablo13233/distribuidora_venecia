@@ -13,24 +13,31 @@
 	
 	
 
-	<div id="carouselExampleIndicators" id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+	<div id="carouselExampleIndicators" id="myCarousel" class="carousel slide" data-bs-ride="carousel" style="">
 
 		<!--contador/ubicador de carrusel-->
 		<div class="carousel-indicators" >
-
+			
 			{% for dato in imagenes_carrusel %}
-			<button style="display: block; width: 15px; height: 15px; border-radius: 50%;" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}"
+			<button style="background-color: rgba(232, 237, 243, 0.867); margin-bottom: 1%; display: block; width: 15px; height: 15px; border-radius: 50%;" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter0 }}"
 				class="{% if forloop.first %} active {% endif %}" aria-current="{% if forloop.first %} true {% endif %}" aria-label="Slide {{ forloop.counter }}"></button>
-			{% endfor %}
+			
+				{% endfor %}
+			
 		</div>
 
 		<!--imagenes del carrusel-->
+		
 		<div class="carousel-inner">
 
 			{% for dato in imagenes_carrusel %}
 			
 			<div class="carousel-item {% if forloop.first %} active {% endif %}">
-				<img src="{{ dato.imagen_Carrusel.url}}" class="d-block w-100" alt="..." style=" width: 100%; height: 450px;">
+				<a href="{{ dato.direccion_Carrusel}}" target="_blank">
+					<img src="{{ dato.imagen_Carrusel.url}}" class="d-block w-100" alt="..." style=" width: 100%; height: 450px;">	
+
+				</a>
+				
 			</div>
 			{% endfor %}
 		</div>
@@ -39,16 +46,26 @@
 		<!--boton izquiedo-->
 		
 		
-		<button class="carousel-control-prev border-0" type="button" data-bs-target="#carouselExampleIndicators" style="background: rgb(165, 165, 165); left: 3%;display: block; width: 50px; height: 50px; border-radius: 50%;"
+		<button class="carousel-control-prev border-0" type="button" data-bs-target="#carouselExampleIndicators" style="background-color: transparent;"
 			data-bs-slide="prev">
-			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-			<span class="visually-hidden">Previous</span>
+			<svg  xmlns="{% static 'images/icons/carrusel/arrow-left-circle-fill.svg' %}" width="50" height="50" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+				<path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+			  </svg>
+
+			  
+			<!--<span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
+			
+			<!--<span class="visually-hidden">Previous</span>-->
 		</button>
 		<!--boton derecho-->
-		<button class="carousel-control-next border-0" type="button" data-bs-target="#carouselExampleIndicators" style="background: rgb(165, 165, 165); right: 3%;display: block; width: 50px; height: 50px; border-radius: 50%;"
+		
+		<button class="carousel-control-next border-0" type="button" data-bs-target="#carouselExampleIndicators" style="background-color: transparent;"
 			data-bs-slide="next">
-			<span class="carousel-control-next-icon" aria-hidden="true"></span>
-			<span class="visually-hidden">Next</span>
+			<svg xmlns="{% static 'images/icons/carrusel/arrow-right-circle-fill.svg' %}" width="50" height="50" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+				<path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+			  </svg>
+			<!--<span class="carousel-control-next-icon" aria-hidden="true"></span>-->
+			<!--<span class="visually-hidden">Next</span>-->
 		</button>
 
 		
