@@ -14,7 +14,7 @@ class IndexHomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        productos = Producto.objects.all().order_by('pk')[:5]
+        productos = Producto.objects.all().order_by('pk')[:8]
         carrusel = Carrusel.objects.all().order_by('pk')[:3]
         context['imagenes'] = carrusel
         context['last_productos'] = productos

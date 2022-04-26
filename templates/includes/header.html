@@ -51,7 +51,7 @@
                             Categorias </a>
                         <ul class="dropdown-menu">
                             {% for cat in ctx_categorias %}
-                            <li> <a class="dropdown-item" href="#">{{ cat.nombre_categoria }} </a> </li>
+                            <li> <a class="dropdown-item btn tbn-sm" href="{% url 'producto_app:producto_categoria' cat.pk %}" role="button" aria-disabled="true">{{ cat.nombre_categoria }} </a> </li>
                             {% endfor %}
                         </ul>
                     </li>

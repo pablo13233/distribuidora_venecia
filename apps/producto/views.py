@@ -85,16 +85,6 @@ def producto_ajax (request):
         return render(request, 'producto/crear_producto.html',{'categorias':categorias,'marcas':marcas})
 
 # clases par vistas
-class ProductoLastList(TemplateView):
-    template_name = 'producto/producto_last.html'
-    context_object_name = 'productos'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['productos'] = Producto.objects.all().order_by('-pk')[:8]
-        return context
-
-
 class ProductosListView(ListView):
     template_name = "producto/productos_all.html"
     model = Producto
@@ -120,3 +110,17 @@ class ProductDetailView(DetailView):
         context = super(ProductDetailView, self).get_context_data(**kwargs)
         context['producto'] = Producto.objects.get(pk=self.kwargs['pk'])
         return context
+
+
+
+class ProductosByCategoriaListView(ListView):
+    template_name = "producto/producto_categoria.html"
+    context_object_name = 'productos_cat'
+
+    def get_queryset(self):
+        cat_prod = self.kwargs['pk']
+        print('id categoria: ', cat_prod)
+        lista = Producto.objects.filter(
+            categoria__pk=cat_prod
+        )
+        return lista
