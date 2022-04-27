@@ -88,12 +88,16 @@ def producto_ajax (request):
 class ProductosListView(ListView):
     template_name = "producto/productos_all.html"
     model = Producto
-    paginate_by = 12
     ordering = 'nombre_producto'
+    paginate_by = 12
+    context_object_name = 'productos'
+    
+    def get_queryset(self):
+        prod = Producto.objects.all()
+        return (prod)
     
     def get_context_data(self, **kwargs):
         context = super(ProductosListView, self).get_context_data(**kwargs)
-        context['productos'] = Producto.objects.all()
         context['cats'] = Categoria.objects.all()
         return context
 
