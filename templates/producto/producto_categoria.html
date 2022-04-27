@@ -12,7 +12,7 @@ Distribuidora Venecia
         <h2 class="text-white">Distribuidora Venecia</h2>
         <ol class="breadcrumb ondark mb-0">
             <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-            <li class="breadcrumb-item">Todos los productos para la categoria: {{ productos_cat.categoria.nombre_categoria }}</li>
+            <li class="breadcrumb-item">Todos los productos para la categoria: {{ cat_id.nombre_categoria }}</li>
         </ol>
     </div> <!-- container //  -->
 </section>
@@ -22,7 +22,46 @@ Distribuidora Venecia
 <section class="padding-y">
     <div class="container">
         <div class="row">
-            <main class="col-lg-12">
+            <aside class="col-lg-2">
+
+                <button class="btn btn-outline-secondary mb-3 w-100  d-lg-none" data-bs-toggle="collapse"
+                    data-bs-target="#aside_filter">Mostrar filtros</button>
+
+                <!-- ===== Card for sidebar filter ===== -->
+                <div id="aside_filter" class="collapse card d-lg-block mb-5">
+
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" class="title" data-bs-toggle="collapse" data-bs-target="#collapse_aside1">
+                                <i class="icon-control fa fa-chevron-down"></i> Nuestras categorías
+                            </a>
+                        </header>
+                        <div class="collapse show" id="collapse_aside1">
+                            <div class="card-body">
+                                <ul class="list-menu">
+                                    {% for categoria  in cats %}
+
+                                    {% ifequal categoria.pk id_categoria %}
+                                    <li><a href="{% url 'producto_app:producto_categoria' categoria.pk %}">
+                                            <span
+                                                style="color: #0d6efd;"><u>{{categoria.nombre_categoria}}</u></span></a>
+                                    </li>
+                                    {% else %}
+                                    <li><a href="{% url 'producto_app:producto_categoria' categoria.pk %}">
+                                            {{categoria.nombre_categoria}}</a>
+                                    </li>
+                                    {% endifequal %}
+
+                                    {% endfor %}
+                                </ul>
+                            </div> <!-- card-body.// -->
+                        </div> <!-- collapse.// -->
+                    </article> <!-- filter-group // -->
+                </div> <!-- card.// -->
+                <!-- ===== Card for sidebar filter .// ===== -->
+
+            </aside> <!-- col .// -->
+            <main class="col-lg-9 ms-3 me-3">
                 <!-- ========= content items ========= -->
                 <div class="row">
                     {% for prod in productos_cat %}
@@ -31,7 +70,7 @@ Distribuidora Venecia
                             <div class="img-wrap">
                                 <a href="{% url 'producto_app:producto_detail' prod.id %}">
                                     <img src="{{ prod.img_producto.url }}" class="btn img-fluid"
-                                        style="width: auto; height: 250px;" alt="">
+                                        style="width: auto; height: auto;" alt="">
                                 </a>
                             </div>
                             <figcaption class="info-wrap border-top">

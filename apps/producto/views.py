@@ -90,14 +90,12 @@ class ProductosListView(ListView):
     model = Producto
     paginate_by = 12
     ordering = 'nombre_producto'
-    context_object_name = 'productos'
     
-    def get_queryset(self):
-        palabra = self.request.GET.get('kword', '')
-        lista = Producto.objects.filter(
-            nombre_producto__icontains=palabra
-        )
-        return lista
+    def get_context_data(self, **kwargs):
+        context = super(ProductosListView, self).get_context_data(**kwargs)
+        context['productos'] = Producto.objects.all()
+        context['cats'] = Categoria.objects.all()
+        return context
 
 
 
@@ -119,8 +117,12 @@ class ProductosByCategoriaListView(ListView):
 
     def get_queryset(self):
         cat_prod = self.kwargs['pk']
-        print('id categoria: ', cat_prod)
         lista = Producto.objects.filter(
             categoria__pk=cat_prod
         )
-        return lista
+        return (lista)
+    def get_context_data(self, **kwargs):
+        context = super(ProductosByCategoriaListView, self).get_context_data(**kwargs)
+        context['cat_id'] = Categoria.objects.get(pk=self.kwargs['pk'])
+        context['cats'] = Categoria.objects.all()
+        return context
