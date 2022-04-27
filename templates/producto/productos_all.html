@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% load  static %}
+
+{% block title %}
+Distribuidora Venecia
+{% endblock title %}
+
+{% block content %}
+<section class="bg-primary py-5">
+    <div class="container">
+        <h2 class="text-white">Distribuidora Venecia</h2>
+        <ol class="breadcrumb ondark mb-0">
+            <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+            <li class="breadcrumb-item">Todos los productos</li>
+        </ol>
+    </div> <!-- container //  -->
+</section>
+<!-- ============== SECTION PAGETOP END// ============== -->
+<br>
+
+<!-- ============== SECTION CONTENT ============== -->
+<section class="padding-y">
+    <div class="container">
+        <div class="row">
+            <aside class="col-lg-3">
+
+                <button class="btn btn-outline-secondary mb-3 w-100  d-lg-none" data-bs-toggle="collapse"
+                    data-bs-target="#aside_filter">Mostrar filtros</button>
+
+                <!-- ===== Card for sidebar filter ===== -->
+                <div id="aside_filter" class="collapse card d-lg-block mb-5">
+
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" class="title" data-bs-toggle="collapse" data-bs-target="#collapse_aside1">
+                                <i class="icon-control fa fa-chevron-down"></i> Nuestras categorías
+                            </a>
+                        </header>
+                        <div class="collapse show" id="collapse_aside1">
+                            <div class="card-body">
+                                <ul class="list-menu">
+                                    {% for categoria  in cats %}
+
+                                    {% ifequal categoria.pk id_categoria %}
+                                    <li><a href="{% url 'producto_app:producto_categoria' categoria.pk %}">
+                                            <span
+                                                style="color: #0d6efd;"><u>{{categoria.nombre_categoria}}</u></span></a>
+                                    </li>
+                                    {% else %}
+                                    <li><a href="{% url 'producto_app:producto_categoria' categoria.pk %}">
+                                            {{categoria.nombre_categoria}}</a>
+                                    </li>
+                                    {% endifequal %}
+
+                                    {% endfor %}
+                                </ul>
+                            </div> <!-- card-body.// -->
+                        </div> <!-- collapse.// -->
+                    </article> <!-- filter-group // -->
+                </div> <!-- card.// -->
+                <!-- ===== Card for sidebar filter .// ===== -->
+
+            </aside> <!-- col .// -->
+            <main class="col-lg-9">
+                <!-- ========= content items ========= -->
+                <div class="row">
+                    {% for prod in productos %}
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <figure class="card card-product-grid">
+                            <div class="img-wrap">
+                                <a href="{% url 'producto_app:producto_detail' prod.id %}">
+                                    <img src="{{ prod.img_producto.url }}" class="btn img-fluid"
+                                        style="width: auto; height: 250px;" alt="">
+                                </a>
+                            </div>
+                            <figcaption class="info-wrap border-top">
+                                <a href="{% url 'producto_app:producto_detail' prod.id %}"
+                                    class="title text-truncate">{{ prod.nombre_producto }}</a>
+                                <small class="text-muted">{{ prod.descripcion_producto|truncatewords:5 }}</small>
+                            </figcaption>
+                        </figure>
+                    </div> <!-- col end.// -->
+                    {% endfor %}
+                </div> <!-- row end.// -->
+                <div class="row">
+                    {% if is_paginated %}
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Atras">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% for page in page_obj.paginator.page_range %}
+
+                            {% ifequal page page_obj.number  %}
+                            <li class="page-item active"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+                            {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+                            {% endifequal %}
+
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{page_obj.next_page_number}}" aria-label="Siguiente">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                    {% endif %}
+                </div>
+            </main> <!-- col .// -->
+        </div> <!-- row .// -->
+    </div>
+</section>
+{% endblock content %}

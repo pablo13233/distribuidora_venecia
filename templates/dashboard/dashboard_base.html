@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Type some info">
+    <meta name="author" content="Type name">
+
+    <title>{% block title %} {% endblock title %}</title>
+
+    <!-- Bootstrap css -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" />
+
+    <!-- Custom css -->
+    <link href="{% static 'css/ui.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet" type="text/css" />
+
+    <!-- Font awesome 5 -->
+    <link href="{% static 'fonts/fontawesome/css/all.min.css' %}" type="text/css" rel="stylesheet">
+    <!--faviicon-->
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.ico' %}" sizes="96x96">
+    <!-- Para admin Cdns -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.8/sweetalert2.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+</head>
+
+<body class="bg-light">
+
+    <!-- ================ HEADER ================ -->
+    {% include 'includes/dashboard/dashboard_header.html' %}
+    <!-- ================ HEADER END.// ================ -->
+
+    {% block content %}
+
+    {% endblock content %}
+
+    <!-- ================ FOOTER ================ -->
+    {% include 'includes/dashboard/dashboard_footer.html' %}
+    <!-- ================ FOOTER END.// ================ -->
+
+    <!-- Bootstrap js -->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Custom js -->
+    <script src="{% static 'js/script.js' %}"></script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.8/sweetalert2.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"></script>
+
+</body>
+<script>
+    $("#cerrar_sesion").on('click', function(){
+        Swal.fire({
+            title: '¿Desea cerrar la sesión?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí',
+            cancelButtonText: 'No'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "{% url 'login_app:cerrar_sesion' %}";
+
+            }
+        })
+    });
+</script>
+</html>
+

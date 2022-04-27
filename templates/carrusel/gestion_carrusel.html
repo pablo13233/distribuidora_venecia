@@ -1,0 +1,379 @@
+{% extends "dashboard/dashboard_base.html" %}
+
+{% load  static %}
+
+{% block title %}
+Administración de Carrusel
+{% endblock title %}
+
+{% block content %}
+
+  <div class="container-fluid">  
+
+
+    <div class="d-flex justify-content-center col-12 mb-4 ">
+      <h3 class="mt-4">Imagenes del Carrusel</h3>
+    </div>
+    
+    <div class="table-responsive shadow p-4 mb-4 bg-white rounded">
+      <table class="table table-hover" id="datatable">
+               <thead>
+                 <tr>
+                    <th>Nº</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Dirección</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                    
+                    
+                 </tr>
+               </thead>
+                <tbody>
+
+                </tbody>
+        </table>
+
+        <div class="col-2">
+            <button type="button" class="form-control btn btn-success btn-sm" id="btnAdd">
+              <i class="fa-solid fa-plus"></i>
+              Agregar Imagen
+            </button>
+        </div>
+    </div>
+  </div>
+<!-- Inicio Modal Agregar Producto -->
+<div class="modal fade" id="modalCarrusel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      
+  <div class="modal-dialog modal-dialog-centered" role="document">
+
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <h5 class="modal-title" id="">
+          <i class="fa-solid fa-plus"></i> <span>Crear Producto</span></h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+
+          <form method="post" action="." id="form_carrusel" enctype="multipart/form-data">
+              <div class="form-group row">
+                  {% csrf_token %}
+                  <input type="text" class="d-none" name="action" id="action" value="crear" />
+                  <input type="text" class="d-none" id="id_carrusel" value="0" />
+                            
+
+                  <div class="col-md-12">
+                      <label for="">Nombre</label>
+                      <input type="text" class="form-control" name="nombre" id="nombre" required placeholder="Nombre de la imagen"/>
+                  </div>
+              </div>
+
+              <div class="form-group row">
+                  <div class="col-md-12">
+                    <label for="">Dirección</label>
+                    <input type="text" class="form-control" name="direccion_Carrusel" id="direccion_Carrusel" required placeholder="Referencia de busqueda"/>
+                    <br>
+                  </div>
+                  <div class="col-md-12">
+                    <label for="">Descripción</label>
+                    <textArea id="descripcion_Carrusel" name="descripcion_Carrusel" class="form-control "placeholder="Descripción de la imagen" style="resize: none">
+                      
+                    </textArea>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                  <div class="col-md-6" >
+                      <label for="">Estado</label>
+                      <select name="estado_Carrusel" id="estado_Carrusel" class="form-control">
+                          <option value="">--Seleccione--</option>
+                          <option value="True">Activo</option>
+                          <option value="False">Inactivo</option>
+                          
+                      </select>
+                      <br>
+                  </div>
+                 
+                  
+              </div>
+              
+              <div class="form-group row " >
+                
+                  <div class="col-md-12">
+                      
+                      
+                      <label for="">Imagen</label>
+                      <input type="file" id="imagen" name="imagen" accept="image/*">
+                      <br><br>
+                      <label for="" style="color:#939393;">El tamaño de la imagen  no debe ser mayor a 2mb (1920x450 px)</label>
+
+                     
+                     
+                  </div>
+              </div>
+          </form>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary" id="btn">Guardar</button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<!-- Fin Modal Agregar carrusel -->
+
+  <!-- Inicio modal ver/editar imagen-->
+  <div class="modal fade" id="modalImagen">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <img src="" class="img-responsive" style="width: 100%; heigth: 100%;" id="id_imagen">
+        </div>
+    </div>
+</div>
+<!-- Fin modal ver/editar imagen-->
+
+
+
+  <script>
+
+    //==================================================Carga de Pagina Gestion Carrusel========================================================
+
+    var modalTitulo = $('.modal-title');
+    var tablaCarrusel;
+
+    window.onload = function(){
+        
+        //alert("Pagina cargada");
+        $("#btnAdd").on("click", function(){
+            modalTitulo.find('span').html('Agregar Imagen');
+            modalTitulo.find('i').removeClass().addClass('fas fa-plus');
+            $('#action').val("crear");
+            $('#form_carrusel')[0].reset();
+            $('#direccion_Carrusele').val("");
+            $('#direccion_Carrusel').val("");
+            $('#estado_Carrusel').val("");
+            $('#nombre').val("");
+
+            $('#nombre').focus();
+            
+            
+            $('#modalCarrusel').modal('show');
+        });
+        $('#datatable').DataTable();
+        obtenerDatos();
+    }
+
+
+    //================================================== Obtener Datos===========================================================
+    function obtenerDatos(){
+        token = $('input[name="csrfmiddlewaretoken"]').val();
+        tablaCarrusel = $('#datatable').DataTable({
+            responsive: true,
+            autoWidth: false,
+            destroy: true,
+            bSortable: true,
+            deferRender: true,
+            language: { "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json" },
+            ajax: {
+                url: window.location.pathname,//Obtenemos la url obsoluta
+                type: 'POST',
+                data: {
+                    'action': 'buscardatos', //Mandamos la accion para que django sepa que tiene que buscar
+                    'csrfmiddlewaretoken': token
+                }, // parametros
+                dataSrc: ""
+            },
+            columns: [ //Columnas de nuestro modelo/Tabla aqui retorna o pinta los valores en la datables
+                { "data": "id"},  
+                { "data": "nombre_Carrusel"}, 
+                { "data": "descripcion_Carrusel"}, 
+                { "data": "direccion_Carrusel"}, 
+                { "data": "estado_Carrusel"}, 
+                { "data": "id"},//3 esta no existe en los modelos porque son los botones tenemos que personalizarlo
+            ],
+            columnDefs: [ //Personalizar una columna
+                {
+                    targets: [5], //Personalizar la colummna numero 3
+                    class: 'text-center',
+                    orderable: false,
+                    render: function (data, type, row) {
+                        var buttons = `<a  rel="verImagen" class='btn btn-success btn-sm btn-flat test-popup-link'>
+                            <i class="fa-solid fa-file-image"></i></a> `;
+
+                            buttons += `<a rel="editar" class="btn btn-warning btn-sm btn-flat">
+                                        <i class="fas fa-edit"></i></a> `;
+
+                            buttons += `<a  rel="eliminar" class='btn btn-danger btn-sm btn-flat'>
+                                        <i class="fa-solid fa-trash-can"></i></a>`;
+                            return buttons;
+                    }
+                },
+            ],
+        });
+    }
+
+    //==================================================validar formulario=======================================================
+    $("#btn").on("click", function (){
+    
+    if($("#nombre").val() == "" ){
+        alert("Falta el nombre de la imagen");
+
+    }else if($( "#direccion_Carrusel" ).val() == ""){
+        alert("Falta la referencia de la imagen");
+
+    }else if($( "#descripcion_Carrusel" ).val() == ""){
+        alert("Falta la Descripción de la imagen");
+
+    }else if($( "#estado_Carrusel" ).val() == ""){
+        alert("Seleccione un estado de la imagen");
+
+    }else{
+        submit_with_ajax("","");
+    }
+    return false;
+    });
+
+    //================================================Función AJAX======================================================
+     
+     function submit_with_ajax(url, parametros) {
+        var parametros = new FormData();
+        token = $('input[name="csrfmiddlewaretoken"]').val();
+        parametros.append('action', $('#action').val());
+
+        parametros.append('nombre_Carrusel', $("#nombre").val());
+        parametros.append('descripcion_Carrusel', $("#descripcion_Carrusel").val());
+        parametros.append('direccion_Carrusel', $("#direccion_Carrusel").val());
+        parametros.append('estado_Carrusel', $( "#estado_Carrusel" ).val());
+
+
+        parametros.append('id', parseInt($("#id_carrusel").val()));
+        
+
+
+        parametros.append('imagen', $("#imagen")[0].files[0]);
+
+
+        parametros.append('csrfmiddlewaretoken',token);
+        
+        $.ajax({
+            url: window.location.pathname, //window.location.pathname
+            type: 'POST',
+            data: parametros,// parametros,
+
+            dataType: 'json',
+            contentType: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                //alert("Correcto");
+                if(result.correcto){
+                    $('#form_carrusel')[0].reset();
+                    $("#modalCarrusel").modal("hide");
+                    tablaCarrusel.ajax.reload(null, false);
+    
+                    switch(result.tipo_accion) {
+                        case "crear":
+                            texto = "Datos guardado con éxito";
+                          break;
+                        case "editar":
+                            texto = "Datos editados con éxito";
+                          break;
+                        case "eliminar":
+                            texto = "Registro eliminado con éxito";
+                          break;
+                        default:
+                            texto = "";
+                      }       
+    
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Correcto',
+                        text: texto
+                    });
+    
+                }else{
+                  tablaCarrusel.ajax.reload(null, false);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Ha ocurrido un error al realizar la acción'
+                    });
+                }  
+
+            },
+            error: function (error) {
+                //alert(error.responseJSON.Message);
+              
+            },
+            failure: function () {
+                //alert('Failure');
+            }
+        });
+    }
+    
+  //=================================================Data table=============================================================
+
+  
+
+  $('#datatable tbody').on('click', 'a[rel="editar"]', function () {
+        var tr = tablaCarrusel.cell($(this).closest('td, li')).index();
+        var data = tablaCarrusel.row(tr.row).data();
+
+        modalTitulo.find('span').html('Editar producto');
+        modalTitulo.find('i').removeClass().addClass('fas fa-edit');
+
+        $('#action').val("editar");
+        $('#id_carrusel').val(data.id);
+        $('#nombre').val(data.nombre_Carrusel);
+        $('#descripcion_Carrusel').val(data.descripcion_Carrusel);
+        $('#direccion_Carrusel').val(data.direccion_Carrusel);
+        $('#estado_Carrusel').val(data.estado_Carrusel);
+        //alert(data.estado_Carrusel);
+        //console.log(data.estado_Carrusel);
+        //console.log(data.imagen_Carrusel);
+        //$('#imagen').val(data.imagen_Carrusel);
+
+
+        $('#modalCarrusel').modal('show');
+    }).on('click', 'a[rel="eliminar"]', function (){
+        var tr = tablaCarrusel.cell($(this).closest('td, li')).index();
+        var data = tablaCarrusel.row(tr.row).data();
+
+        $('#action').val("eliminar");
+        $('#id_carrusel').val(data.id);
+
+        Swal.fire({
+            title: `¿Esta seguro de eliminar el registro Nro ${data.id}?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+          }).then((result) => {
+            if (result.isConfirmed) {
+                submit_with_ajax("","");
+            }
+          });
+
+    }).on('click', 'a[rel="verImagen"]', function(){
+        var tr = tablaCarrusel.cell($(this).closest('td, li')).index();
+        var data = tablaCarrusel.row(tr.row).data();
+        //console.log(data.imagen_Carrusel);
+        $("#id_imagen").attr("src", data.imagen_Carrusel);
+        $("#modalImagen").modal("show");
+    });
+
+
+
+  </script>
+{% endblock content %}

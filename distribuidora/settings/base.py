@@ -20,11 +20,19 @@ DJANGO_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap_pagination'
 )
 
 LOCAL_APPS = (
     #apps locales
     'apps.home',
+    'apps.categoria',
+    'apps.producto',
+    'apps.marca',
+    'apps.login',
+    'apps.busqueda',
+    'apps.carrusel',
+
 )
 
 THIRD_PARTY_APPS = (
@@ -56,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.categoria.processors.categoria_list',
             ],
         },
     },
@@ -101,3 +110,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+#Login
+LOGIN_URL= '/login'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 60*60
