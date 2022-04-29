@@ -23,3 +23,5 @@ class IndexHomeView(TemplateView):
 class DashboardIndexView(TemplateView):
     template_name = "dashboard/dashboard_index.html"
 
+class UbicacionView(TemplateView):
+    template_name = 'home/ubicacion.html'

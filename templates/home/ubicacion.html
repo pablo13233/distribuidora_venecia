@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load  static %}
+{% block title %}
+Ubicacion
+{% endblock title %}
+
+{% block content %}
+
+
+<!-- ============== SECTION CONTENT  ============== -->
+<section class="padding-y bg-light">
+    <div class="container">
+
+        <header class="section-heading">
+            <h2 class="section-title">Encuentranos </h2>
+        </header>
+
+        <div class="row">
+            <div class="col-12">
+                <p class="fs-2">
+                    Colonia Venecia 2da entrada, 8 cuadras al sur y 1/2 al oeste
+                </p>
+                <br>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-10" id="map">
+
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div> <!-- container .//  -->
+</section>
+
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap&v=weekly"
+      defer
+    ></script>
+
+{% endblock content %}

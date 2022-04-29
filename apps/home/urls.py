@@ -12,4 +12,5 @@ urlpatterns = [
         views.DashboardIndexView.as_view(), 
     name='dashboard_index',
     ),
+    path('ubicacion',views.UbicacionView.as_view(),name='mapa'),
 ]
